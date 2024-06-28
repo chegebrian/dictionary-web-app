@@ -1,12 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./script.js" defer></script>
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./build/tailwindcss.css" />
+    <script
+      src="https://kit.fontawesome.com/afbae0cb27.js"
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <script src="./script.js" defer type="module"></script>
+    <title>Dictionary Web App</title>
+    <style>
+      .switch {
+        position: relative;
+        height: 1.25rem;
+        width: 3rem;
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+        border-radius: 9999px;
+        background-color: rgba(100, 116, 139, 0.377);
+        transition: all 0.3s ease;
+      }
+
+      .switch:checked {
+        background-image: linear-gradient(to right, #bf6ddb, #182172);
+      }
+
+      .switch::before {
+        position: absolute;
+        content: "";
+        left: calc(1.5rem - 1.6rem);
+        top: calc(1.5rem - 1.6rem);
+        display: block;
+        height: 1.5rem;
+        width: 1.6rem;
+        cursor: pointer;
+        border: 1px solid rgba(100, 116, 139, 0.527);
+        border-radius: 9999px;
+        background-color: rgba(255, 255, 255, 1);
+        box-shadow: 0 3px 10px rgba(100, 116, 139, 0.327);
+        transition: all 0.3s ease;
+      }
+
+      .switch:hover::before {
+        box-shadow: 0 0 0px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      .switch:checked:hover::before {
+        box-shadow: 0 0 0px 8px rgba(192, 109, 219, 0.15);
+      }
+
+      .switch:checked:before {
+        transform: translateX(100%);
+        border-color: #bf6ddb;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="p-8">
+      <header>
+        <nav class="flex items-center justify-between">
+          <div>
+            <img src="./images/logo.svg" alt="" class="logo" />
+          </div>
+          <div class="settings flex items-center justify-center gap-8">
+            <div class="dropdown flex items-center flex-col">
+              <button
+                id="dropdownRadioButton"
+                data-dropdown-toggle="dropdownDefaultRadio"
+                class="text-slate-700 font-medium text-md text-center flex items-center gap-2 justify-center pl-2 pr-8 border-r-2"
+                type="button"
+              >
+                Fonts
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                  />
+                </svg>
+              </button>
+
+              <!-- Dropdown menu -->
+              <div
+                id="dropdownDefaultRadio"
+                class="z-10 hidden fixed mt-12 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-md shadow-purple-200 dark:bg-gray-700 dark:divide-gray-600"
+              >
+                <ul
+                  class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200"
+                  aria-labelledby="dropdownRadioButton"
+                >
+                  <li>
+                    <div class="flex items-center">
+                      <input
+                        id="default-radio-1"
+                        type="radio"
+                        value=""
+                        name="default-radio"
+                        class="w-4 h-4 accent-purple-600"
+                      />
+                      <label
+                        for="default-radio-1"
+                        class="ms-2 text-sm font-medium text-slate-700 dark:text-gray-300"
+                        >San Serif</label
+                      >
+                    </div>
+                  </li>
+                  <li>
+                    <div class="flex items-center">
+                      <input
+                        checked
+                        id="default-radio-2"
+                        type="radio"
+                        value=""
+                        name="default-radio"
+                        class="w-4 h-4 accent-purple-600"
+                      />
+                      <label
+                        for="default-radio-2"
+                        class="ms-2 text-sm font-medium text-slate-700 dark:text-gray-300"
+                        >Serif</label
+                      >
+                    </div>
+                  </li>
+                  <li>
+                    <div class="flex items-center">
+                      <input
+                        id="default-radio-3"
+                        type="radio"
+                        value=""
+                        name="default-radio"
+                        class="w-4 h-4 accent-purple-600"
+                      />
+                      <label
+                        for="default-radio-3"
+                        class="ms-2 text-sm font-medium text-slate-700 dark:text-gray-300"
+                        >Mono</label
+                      >
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="color-scheme flex items-center justify-center gap-x-3">
+              <input class="switch" type="checkbox" checked="true" />
+
+              <img src="./images/icon-moon.svg" alt="" />
+            </div>
+          </div>
+        </nav>
+        <form
+          class="flex border-2 hover:border-purple-500 focus:border-purple-500 rounded-lg bg-slate-200 my-10"
+        >
+          <label for="search" class="sr-only">Search</label>
+          <input
+            type="text"
+            name="search"
+            id="search"
+            placeholder="Search..."
+            class="border-0 outline-0 bg-slate-200 px-4 py-2 w-full rounded-l-lg"
+          />
+
+          <button class="px-4 py-2 bg-slate-200 rounded-r-lg">
+            <img src="./images/icon-search.svg" alt="search icon" />
+          </button>
+        </form>
+      </header>
+      <main class="main">
+        <!-- <section class="flex items-center justify-between">
+          <div class="flex items-center gap-3 flex-col">
+            <h1 class="word">Keyword</h1>
+            <p class="phonetic">keyword</p>
+          </div>
+          <button class="bg-purple-500 w-12 h-12 rounded-full">
+            <i class="fa-solid fa-play" style="color: #ffffff"></i>
+          </button>
+          <button class="bg-purple-500 w-12 h-12 rounded-full hidden">
+            <i class="fa-solid fa-pause" style="color: #ffffff"></i>
+          </button>
+
+        </section> -->
+
+      </main>
+      <footer></footer>
+    </div>
+  </body>
 </html>
