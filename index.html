@@ -56,6 +56,11 @@
         transform: translateX(100%);
         border-color: #bf6ddb;
       }
+      .meaning-list .definition::before {
+        content: url("images/circle-dot-regular.svg");
+        position: absolute;
+        margin-left: -1rem;
+      }
     </style>
   </head>
   <body>
@@ -159,38 +164,27 @@
             </div>
           </div>
         </nav>
-        <form
-          class="flex border-2 hover:border-purple-500 focus:border-purple-500 rounded-lg bg-slate-200 my-10"
-        >
-          <label for="search" class="sr-only">Search</label>
-          <input
-            type="text"
-            name="search"
-            id="search"
-            placeholder="Search..."
-            class="border-0 outline-0 bg-slate-200 px-4 py-2 w-full rounded-l-lg"
-          />
+        <form action="" class="my-10 form">
+          <span class="error text-red-500 font-bold text-sm"></span>
+          <div
+            class="flex border-2 hover:border-purple-500 focus:border-purple-500 rounded-lg bg-slate-200"
+          >
+            <label for="search" class="sr-only">Search</label>
+            <input
+              type="text"
+              name="search"
+              id="search"
+              placeholder="Search..."
+              class="border-0 outline-0 bg-slate-200 px-4 py-2 w-full rounded-l-lg"
+            />
 
-          <button class="px-4 py-2 bg-slate-200 rounded-r-lg">
-            <img src="./images/icon-search.svg" alt="search icon" />
-          </button>
+            <button class="px-4 py-2 bg-slate-200 rounded-r-lg">
+              <img src="./images/icon-search.svg" alt="search icon" />
+            </button>
+          </div>
         </form>
       </header>
       <main class="main">
-        <!-- <section class="flex items-center justify-between">
-          <div class="flex items-center gap-3 flex-col">
-            <h1 class="word">Keyword</h1>
-            <p class="phonetic">keyword</p>
-          </div>
-          <button class="bg-purple-500 w-12 h-12 rounded-full">
-            <i class="fa-solid fa-play" style="color: #ffffff"></i>
-          </button>
-          <button class="bg-purple-500 w-12 h-12 rounded-full hidden">
-            <i class="fa-solid fa-pause" style="color: #ffffff"></i>
-          </button>
-
-        </section> -->
-
       </main>
       <footer></footer>
     </div>

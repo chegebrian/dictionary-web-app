@@ -1,8 +1,14 @@
 import { displayFonts } from "./js/displayfonts.js";
-import { generateMarkup } from "./js/markup.js";
+import { generateMarkup, mainEl } from "./js/markup.js";
 
-let query = "apple";
+const searchEl = document.querySelector("#search");
 const dropdownEl = document.getElementById("dropdownRadioButton");
+const formEl = document.querySelector(".form");
 
 dropdownEl.addEventListener("click", displayFonts);
-generateMarkup(query);
+formEl.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const query = searchEl.value;
+  generateMarkup(query);
+  searchEl.value = "";
+});
