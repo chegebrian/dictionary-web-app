@@ -37,19 +37,25 @@ async function getAudio(audioSrc) {
 }
 
 let meanings = [];
+let sources = [];
 
 export async function generateMarkup(query) {
   try {
     const data = await getQuery(API_URL, query);
-    console.log(data);
     state.query = createQuery(data);
+    console.log(data);
     data.forEach((element) => {
       meanings.push(element.meanings);
     });
+    data.forEach((element) => {
+      sources.push(element.sourceUrls);
+    });
+
+    let srcUrl = sources.flat();
     let def = meanings.flat();
 
+    console.log(srcUrl);
     let obj = def[0];
-
     let synonymLabel = Object.keys(obj).find((key) => key === "synonyms");
     let antonymLabel = Object.keys(obj).find((key) => key === "antonyms");
     let audio = state.query.phonetics.find((sound) => {
@@ -61,8 +67,8 @@ export async function generateMarkup(query) {
     const markup = `
             <section class="flex items-center justify-between">
           <div class="flex items-start gap-3 flex-col">
-            <h1 class="word">${state.query.word}</h1>
-            <p class="phonetic">${
+            <h1 class="word text-3xl font-semibold">${state.query.word}</h1>
+            <p class="phonetic text-lg font-semibold text-purple-500">${
               state.query.phonetic ? state.query.phonetic : ""
             }</p>
           </div>
@@ -75,16 +81,18 @@ export async function generateMarkup(query) {
           .map((meaning) => {
             return `
           
-            <h3>${meaning.partOfSpeech}</h3>
-            <p>meaning</p>
+            <h3 class="text-lg font-bold italic">${meaning.partOfSpeech}</h3>
+            <p class="capitalize">meaning</p>
             <ul class="meaning-list pl-4">
             ${meaning.definitions
               .map((definition) => {
                 return `
                 
                 <li class="definition">
-                  <p class="definition-text">${definition.definition}</p>
-                  <span class="definition-example">${
+                  <p class="definition-text text-slate-950 mt-2">${
+                    definition.definition
+                  }</p>
+                  <span class="definition-example text-slate-500">${
                     definition.example ? definition.example : ""
                   }</span>
                 </li>
@@ -100,7 +108,7 @@ export async function generateMarkup(query) {
               <ul class="synonym-list flex">
               ${meaning.synonyms
                 .map((synonym) => {
-                  return `<li class="cursor-pointer synonym"><a href="/#${synonym}">${synonym}</a></li>`;
+                  return `<li class="cursor-pointer synonym text-purple-500"><a href="/#${synonym}">${synonym}</a></li>`;
                 })
                 .join(", ")}
               </ul>
@@ -113,7 +121,7 @@ export async function generateMarkup(query) {
                   ${meaning.antonyms
                     .map((antonym) => {
                       return `
-                      <li class="cursor-pointer antonym" ><a href="/#${antonym}">${antonym}</a></li>
+                      <li class="cursor-pointer antonym text-purple-500" ><a href="/#${antonym}">${antonym}</a></li>
                     `;
                     })
                     .join(", ")}
@@ -123,6 +131,17 @@ export async function generateMarkup(query) {
           `;
           })
           .join("")}
+          </section>
+          <section class="source-url">
+          <p class="source label">${srcUrl.length === 0 ? "" : "Source"}</p>
+          <ul>
+          ${srcUrl.map((src) => {
+            return `
+            <li>
+              <a href="${src}" target="_blank">${src}</a>
+            </li>`
+          }).join("")}
+          </ul>
           </section>
     `;
     clear();

@@ -9,7 +9,6 @@ dropdownEl.addEventListener("click", displayFonts);
 formEl.addEventListener("submit", (e) => {
   e.preventDefault();
   const query = searchEl.value;
-  console.log(query);
   generateMarkup(query);
   searchEl.value = "";
 });
@@ -18,5 +17,4 @@ formEl.addEventListener("submit", (e) => {
 window.addEventListener("hashchange", () => {
   const idQuery = window.location.hash.slice(1);
   generateMarkup(idQuery);
-  console.log(idQuery);
 });
