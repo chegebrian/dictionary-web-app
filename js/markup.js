@@ -9,10 +9,9 @@ export const state = {
 function clear() {
   mainEl.innerHTML = "";
 }
-console.log(mainEl);
+
 function createQuery(data) {
   const query = data[0];
-  console.log(query.phonetics);
   return {
     word: query.word,
     phonetic: query.phonetic,
@@ -31,13 +30,9 @@ mainEl.addEventListener("click", (e) => {
   }
 });
 
-const controller = new AbortController();
-const signal = controller.signal;
-
 async function getAudio(audioSrc) {
   let res = await fetch(audioSrc);
   let blob = await res.blob();
-  console.log(blob);
   soundEl.src = URL.createObjectURL(blob);
 }
 
@@ -52,14 +47,15 @@ export async function generateMarkup(query) {
       meanings.push(element.meanings);
     });
     let def = meanings.flat();
-    console.log(def);
+
     let obj = def[0];
-    console.log(obj);
+
     let synonymLabel = Object.keys(obj).find((key) => key === "synonyms");
     let antonymLabel = Object.keys(obj).find((key) => key === "antonyms");
     let audio = state.query.phonetics.find((sound) => {
       return sound.audio !== "";
     });
+
     let audioSrc = audio?.audio;
     getAudio(audioSrc);
     const markup = `
@@ -77,8 +73,6 @@ export async function generateMarkup(query) {
         <section class="content my-6">
         ${def
           .map((meaning) => {
-            console.log(meaning);
-
             return `
           
             <h3>${meaning.partOfSpeech}</h3>
@@ -100,24 +94,26 @@ export async function generateMarkup(query) {
               .join("")}
               </ul>
               <div class="synonym-section flex gap-4">
-              <p class="synonym-label">${meaning.synonyms.length === 0 ? "" : synonymLabel}</p>
+              <p class="synonym-label">${
+                meaning.synonyms.length === 0 ? "" : synonymLabel
+              }</p>
               <ul class="synonym-list flex">
               ${meaning.synonyms
                 .map((synonym) => {
-                  return `
-                  <li>${synonym}</li>
-                `;
+                  return `<li class="cursor-pointer synonym"><a href="/#${synonym}">${synonym}</a></li>`;
                 })
                 .join(", ")}
               </ul>
               </div>
               <div class="antonym-section flex gap-4">
-                <p class="antonym-label">${meaning.antonyms.length === 0 ? "" : antonymLabel}</p>
+                <p class="antonym-label">${
+                  meaning.antonyms.length === 0 ? "" : antonymLabel
+                }</p>
                 <ul class="antonym-list flex">
                   ${meaning.antonyms
                     .map((antonym) => {
                       return `
-                      <li>${antonym}</li>
+                      <li class="cursor-pointer antonym" ><a href="/#${antonym}">${antonym}</a></li>
                     `;
                     })
                     .join(", ")}
@@ -132,9 +128,18 @@ export async function generateMarkup(query) {
     clear();
     meanings.length = 0;
     mainEl.innerHTML = markup;
-    console.log(def);
   } catch (error) {
     console.warn(error);
   }
 }
 
+// const idQuery = window.location.hash.slice(1);
+// console.log(idQuery);
+// window.addEventListener('hashchange',() => {
+//   generateMarkup(idQuery);
+//   console.log("hashchange");
+// })
+
+// ['hashchange', 'load'].forEach((ev) => {window.addEventListener(ev, generateMarkup(idQuery))})
+
+// setInterval(() =>{},1000);
