@@ -41,6 +41,7 @@ let sources = [];
 
 export async function generateMarkup(query) {
   try {
+    displaySpinner(mainEl);
     const data = await getQuery(API_URL, query);
     state.query = createQuery(data);
     console.log(data);
@@ -67,7 +68,9 @@ export async function generateMarkup(query) {
     const markup = `
             <section class="flex items-center justify-between">
           <div class="flex items-start gap-3 flex-col">
-            <h1 class="word text-3xl font-semibold dark:text-slate-50">${state.query.word}</h1>
+            <h1 class="word text-3xl font-semibold dark:text-slate-50">${
+              state.query.word
+            }</h1>
             <p class="phonetic text-lg font-semibold text-purple-500">${
               state.query.phonetic ? state.query.phonetic : ""
             }</p>
@@ -81,7 +84,9 @@ export async function generateMarkup(query) {
           .map((meaning) => {
             return `
           
-            <h3 class="text-lg font-bold italic dark:text-slate-50">${meaning.partOfSpeech}</h3>
+            <h3 class="text-lg font-bold italic dark:text-slate-50">${
+              meaning.partOfSpeech
+            }</h3>
             <p class="capitalize dark:text-slate-50">meaning</p>
             <ul class="meaning-list pl-4">
             ${meaning.definitions
@@ -133,14 +138,18 @@ export async function generateMarkup(query) {
           .join("")}
           </section>
           <section class="source-url">
-          <p class="source label dark:text-slate-50">${srcUrl.length === 0 ? "" : "Source"}</p>
+          <p class="source label dark:text-slate-50">${
+            srcUrl.length === 0 ? "" : "Source"
+          }</p>
           <ul>
-          ${srcUrl.map((src) => {
-            return `
+          ${srcUrl
+            .map((src) => {
+              return `
             <li class="dark:text-slate-400">
               <a href="${src}" target="_blank">${src}</a>
-            </li>`
-          }).join("")}
+            </li>`;
+            })
+            .join("")}
           </ul>
           </section>
     `;
@@ -153,3 +162,12 @@ export async function generateMarkup(query) {
   }
 }
 
+function displaySpinner(parentEl) {
+  const markup = `
+  <div class="spinner flex items-center justify-center">
+  <i class="fa-solid fa-spinner fa-spin fa-2xl" style="color: #B197FC;"></i>
+  </div>
+  `;
+  parentEl.innerHTML = "";
+  parentEl.insertAdjacentHTML("afterbegin", markup)
+}
