@@ -60,6 +60,54 @@
         position: absolute;
         margin-left: -1rem;
       }
+
+      /* font family */
+
+      @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap");
+
+      .open-sans {
+        font-family: "Open Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
+        font-variation-settings: "wdth" 100;
+      }
+
+      .roboto-serif {
+        font-family: "Roboto Serif", serif;
+        font-optical-sizing: auto;
+        font-style: normal;
+        font-variation-settings: "wdth" 100, "GRAD" 0;
+      }
+
+      .roboto-mono {
+        font-family: "Roboto Mono", monospace;
+        font-optical-sizing: auto;
+        font-style: normal;
+      }
+
+      :root:has(#sans-serif:checked) {
+        --font-family: "Open Sans", sans-serif;
+        --font-optical-sizing: auto;
+        --font-style: normal;
+      }
+
+      :root:has(#serif:checked) {
+        --font-family: "Roboto Serif", serif;
+        --font-optical-sizing: auto;
+        --font-style: normal;
+      }
+
+      :root:has(#mono:checked) {
+        --font-family: "Roboto Mono", monospace;
+        --font-optical-sizing: auto;
+        --font-style: normal;
+      }
+
+      * {
+        font-family: var(--font-family);
+        font-optical-sizing: var(--font-optical-sizing);
+        font-style: var(--font-style);
+      }
     </style>
   </head>
   <body class="dark:bg-slate-950">
@@ -102,21 +150,20 @@
               >
                 <ul
                   class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200"
-                  aria-labelledby="dropdownRadioButton"
                 >
                   <li>
                     <div class="flex items-center">
                       <input
-                        id="default-radio-1"
+                        id="sans-serif"
                         type="radio"
-                        value=""
-                        name="default-radio"
+                        value="sans-serif"
+                        name="theme"
                         class="w-4 h-4 accent-purple-600"
                       />
                       <label
-                        for="default-radio-1"
+                        for="sans-serif"
                         class="ms-2 text-sm font-medium text-slate-700 dark:text-gray-300"
-                        >San Serif</label
+                        >Sans Serif</label
                       >
                     </div>
                   </li>
@@ -124,14 +171,14 @@
                     <div class="flex items-center">
                       <input
                         checked
-                        id="default-radio-2"
+                        id="serif"
                         type="radio"
-                        value=""
-                        name="default-radio"
+                        value="serif"
+                        name="theme"
                         class="w-4 h-4 accent-purple-600"
                       />
                       <label
-                        for="default-radio-2"
+                        for="serif"
                         class="ms-2 text-sm font-medium text-slate-700 dark:text-gray-300"
                         >Serif</label
                       >
@@ -140,14 +187,14 @@
                   <li>
                     <div class="flex items-center">
                       <input
-                        id="default-radio-3"
+                        id="mono"
                         type="radio"
-                        value=""
-                        name="default-radio"
+                        value="mono"
+                        name="theme"
                         class="w-4 h-4 accent-purple-600"
                       />
                       <label
-                        for="default-radio-3"
+                        for="mono"
                         class="ms-2 text-sm font-medium text-slate-700 dark:text-gray-300"
                         >Mono</label
                       >
@@ -186,7 +233,14 @@
         </form>
       </header>
       <main class="main"></main>
-      <footer></footer>
+      <footer>
+        <!-- <label for="serif">serif</label>
+        <input type="radio" name="theme" id="serif" />
+        <label for="sans-serif">sans-serif</label>
+        <input type="radio" name="theme" id="sans-serif" />
+        <label for="mono">mono</label>
+        <input type="radio" name="theme" id="mono" /> -->
+      </footer>
     </div>
   </body>
 </html>

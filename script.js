@@ -6,6 +6,7 @@ const dropdownEl = document.getElementById("dropdownRadioButton");
 const formEl = document.querySelector(".form");
 const switchEl = document.querySelector(".switch");
 const htmlEl = document.querySelector(".html");
+const themes = document.querySelectorAll("input[name='theme']");
 
 dropdownEl.addEventListener("click", displayFonts);
 formEl.addEventListener("submit", (e) => {
@@ -23,5 +24,31 @@ window.addEventListener("hashchange", () => {
 switchEl.addEventListener("click", (e) => {
   htmlEl.classList.toggle("dark");
 });
-console.log(switchEl);
-console.log(htmlEl);
+
+// save the to local storage
+
+function saveTheme(theme) {
+  localStorage.setItem("theme", theme);
+}
+
+themes.forEach((theme) => {
+  theme.addEventListener("click", () => {
+    saveTheme(theme.id);
+  });
+});
+
+// retreive theme and set the theme
+
+function retreiveTheme() {
+  const selectedTheme = localStorage.getItem("theme")
+
+  themes.forEach((theme) => {
+    if(theme.id === selectedTheme){
+      theme.checked = true;
+    }
+  })
+
+  document.documentElement.className = selectedTheme;
+}
+
+window.onload = retreiveTheme();
