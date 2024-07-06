@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark html">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -62,7 +62,7 @@
       }
     </style>
   </head>
-  <body>
+  <body class="dark:bg-slate-950">
     <audio id="sound"></audio>
     <div class="p-8">
       <header>
@@ -75,7 +75,7 @@
               <button
                 id="dropdownRadioButton"
                 data-dropdown-toggle="dropdownDefaultRadio"
-                class="text-slate-700 font-medium text-md text-center flex items-center gap-2 justify-center pl-2 pr-8 border-r-2"
+                class="text-slate-700 dark:text-slate-50 font-medium text-md text-center flex items-center gap-2 justify-center pl-2 pr-8 border-r-2"
                 type="button"
               >
                 Fonts
@@ -166,7 +166,7 @@
         <form action="" class="my-10 form">
           <span class="error text-red-500 font-bold text-sm"></span>
           <div
-            class="flex border-2 hover:border-purple-500 focus:border-purple-500 rounded-lg bg-slate-200"
+            class="flex border-2 hover:border-purple-500 dark:hover:border-slate-50 focus:border-purple-500 dark:focus:border-slate-50 rounded-lg bg-slate-200 dark:bg-slate-700"
           >
             <label for="search" class="sr-only">Search</label>
             <input
@@ -174,21 +174,19 @@
               name="search"
               id="search"
               placeholder="Search..."
-              class="border-0 outline-0 bg-slate-200 px-4 py-2 w-full rounded-l-lg"
+              class="border-0 outline-0 bg-slate-200 dark:bg-slate-700 dark:text-slate-50 px-4 py-2 w-full rounded-l-lg"
             />
 
-            <button class="px-4 py-2 bg-slate-200 rounded-r-lg">
+            <button
+              class="px-4 py-2 bg-slate-200 rounded-r-lg dark:bg-slate-700"
+            >
               <img src="./images/icon-search.svg" alt="search icon" />
             </button>
           </div>
         </form>
       </header>
-      <main class="main">
-      </main>
-      <footer>
-        
-      </footer>
+      <main class="main"></main>
+      <footer></footer>
     </div>
   </body>
 </html>
-
