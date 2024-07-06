@@ -21,6 +21,12 @@ window.addEventListener("hashchange", () => {
   generateMarkup(idQuery);
 });
 
+window.addEventListener("load", () => {
+  const idQuery = window.location.hash.slice(1);
+  generateMarkup(idQuery);
+});
+
+
 switchEl.addEventListener("click", (e) => {
   htmlEl.classList.toggle("dark");
 });
