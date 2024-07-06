@@ -113,7 +113,7 @@ export async function generateMarkup(query) {
               <ul class="synonym-list flex">
               ${meaning.synonyms
                 .map((synonym) => {
-                  return `<li class="cursor-pointer synonym text-purple-500"><a href="/#${synonym}">${synonym}</a></li>`;
+                  return `<li class="cursor-pointer synonym text-purple-500"><a href="./#${synonym}">${synonym}</a></li>`;
                 })
                 .join(", ")}
               </ul>
@@ -126,7 +126,7 @@ export async function generateMarkup(query) {
                   ${meaning.antonyms
                     .map((antonym) => {
                       return `
-                      <li class="cursor-pointer antonym text-purple-500" ><a href="/#${antonym}">${antonym}</a></li>
+                      <li class="cursor-pointer antonym text-purple-500" ><a href="./#${antonym}">${antonym}</a></li>
                     `;
                     })
                     .join(", ")}
