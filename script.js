@@ -2,7 +2,7 @@ import { displayFonts } from "./js/displayfonts.js";
 import { generateMarkup } from "./js/markup.js";
 
 const searchEl = document.querySelector("#search");
-const dropdownEl = document.getElementById("dropdownRadioButton");
+export const dropdownEl = document.getElementById("dropdownRadioButton");
 const formEl = document.querySelector(".form");
 const switchEl = document.querySelector(".switch");
 const htmlEl = document.querySelector(".html");
